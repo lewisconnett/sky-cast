@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="index.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    </head>
+    <body>
+        <header>
+            <div class="location-container">
+                <span class="material-symbols-outlined"> location_on </span>
+                <h3 id="location-name">Location</h3>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search for places..." />
+                <span id="search-button" class="material-symbols-outlined"> search </span>
+            </div>
+        </header>
+        <main>
+            <div class="welcome-message-container">
+                <h1 id="welcome-message"></h1>
+                <h4 id="date"></h4>
+            </div>
+            <div class="weather-info-container">
+                <img id="weather-icon" src="assets/weather-icons/clear_day.svg" alt="" />
+                <h1 id="temperature">11°C</h1>
+            </div>
+            <div class="additional-weather-info-container">
+                <div class="additional-weather-info">
+                    <img class="additional-weather-icons" src="assets/icons/wi-windy copy.svg" alt="" />
+                    <h3 id="wind-speed">11 km/h</h3>
+                </div>
+                <div class="additional-weather-info">
+                    <img class="additional-weather-icons" src="assets/icons/wi-humidity copy.svg" alt="" />
+                    <h3 id="humidity">74%</h3>
+                </div>
+                <div class="additional-weather-info">
+                    <img class="additional-weather-icons" src="assets/icons/wi-rain copy 2.svg" alt="" />
+                    <h3 id="precipitation-probability">24%</h3>
+                </div>
+            </div>
+        </main>
+    </body>
+    <script src="index.js"></script>
+</html>
