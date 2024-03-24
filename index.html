@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,11 +13,22 @@
         <header>
             <div class="location-container">
                 <span class="material-symbols-outlined"> location_on </span>
-                <h3 id="location-name">Location</h3>
+                <h3 id="location-name"></h3>
             </div>
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search for places..." />
-                <span id="search-button" class="material-symbols-outlined"> search </span>
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search for places..." />
+                <span id="search-button" class="material-symbols-outlined">
+                    search
+                </span>
+            </div>
+            <div class="theme-toggle-container">
+                <img
+                    class="theme-toggle-icon"
+                    id="light-mode-switch"
+                    src="assets/icons/light-mode-switch.svg" />
             </div>
         </header>
         <main>
@@ -26,24 +37,39 @@
                 <h4 id="date"></h4>
             </div>
             <div class="weather-info-container">
-                <img id="weather-icon" src="assets/weather-icons/clear_day.svg" alt="" />
+                <img
+                    id="weather-icon"
+                    src="assets/weather-icons/clear_day.svg"
+                    alt="" />
                 <h1 id="temperature">11°C</h1>
             </div>
             <div class="additional-weather-info-container">
                 <div class="additional-weather-info">
-                    <img class="additional-weather-icons" src="assets/icons/wi-windy copy.svg" alt="" />
+                    <img
+                        class="additional-weather-icons"
+                        src="assets/icons/wi-windy copy.svg"
+                        alt="" />
                     <h3 id="wind-speed">11 km/h</h3>
                 </div>
                 <div class="additional-weather-info">
-                    <img class="additional-weather-icons" src="assets/icons/wi-humidity copy.svg" alt="" />
+                    <img
+                        class="additional-weather-icons"
+                        src="assets/icons/wi-humidity copy.svg"
+                        alt="" />
                     <h3 id="humidity">74%</h3>
                 </div>
                 <div class="additional-weather-info">
-                    <img class="additional-weather-icons" src="assets/icons/wi-rain copy 2.svg" alt="" />
+                    <img
+                        class="additional-weather-icons"
+                        src="assets/icons/wi-rain copy 2.svg"
+                        alt="" />
                     <h3 id="precipitation-probability">24%</h3>
                 </div>
             </div>
         </main>
+        <footer>
+            <p id="disclaimer">Powered by Tomorrow.io</p>
+        </footer>
     </body>
     <script src="index.js"></script>
 </html>

@@ -1,6 +1,8 @@
 window.addEventListener("load", function () {
-    var city = document.querySelector("#search-input");
-    var searchCityBtn = document.querySelector("#search-button");
+    const city = document.querySelector("#search-input");
+    const searchCityBtn = document.querySelector("#search-button");
+    const themeToggleBtn = document.querySelector(".theme-toggle-icon");
+    const htmlElement = document.documentElement;
     const now = new Date();
     const hours = now.getHours();
     displayWelcomeMessage(hours);
@@ -12,7 +14,6 @@ window.addEventListener("load", function () {
 
     const formattedDate = getFormattedDate();
     updateDate(formattedDate);
-
 
     city.addEventListener("keydown", (e) => {
         if (e.key == "Enter") {
@@ -26,6 +27,18 @@ window.addEventListener("load", function () {
         location = city.value;
         console.log("User clicked search, location: " + location);
         search(location);
+    });
+
+    themeToggleBtn.addEventListener("click", function () {
+        console.log("User clicked theme toggle");
+        let currentTheme = htmlElement.getAttribute("data-theme");
+        let newTheme = currentTheme === "light" ? "dark" : "light";
+        if (newTheme === "dark") {
+            themeToggleBtn.src = "assets/icons/dark-mode-switch.svg";
+        } else {
+            themeToggleBtn.src = "assets/icons/light-mode-switch.svg";
+        }
+        htmlElement.setAttribute("data-theme", newTheme);
     });
 
     async function search(location) {
@@ -118,7 +131,7 @@ window.addEventListener("load", function () {
     };
 
     function updateDate(formattedDate) {
-        var date = document.querySelector("#date")
+        var date = document.querySelector("#date");
         date.textContent = `Today, ${formattedDate}`;
     }
 

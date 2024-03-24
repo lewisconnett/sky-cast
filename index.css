@@ -1,13 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root {
+    --background-colour: #F0F0F0;
+    --text-colour: #000000;
+}
+
+[data-theme="dark"] {
+    --text-colour: #DDDDDD;
+    --background-colour: #00173F;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     padding: 0;
     margin: 0;
+    color: var(--text-colour);
+    background-color: var(--background-colour);
 }
 
 header {
     display: flex;
+    margin-top: 1rem;
+}
+
+.theme-toggle-icon {
+    cursor: pointer;
+    height: 2rem;
+}
+
+.theme-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    margin-left: auto;
 }
 
 .location-container {
@@ -19,9 +45,13 @@ header {
     cursor: pointer;
 }
 
+#location-name {
+    margin: 0;
+}
+
 .search-container {
     gap: 0.5rem;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     margin-left: auto;
@@ -30,20 +60,28 @@ header {
 
 #search-button {
     cursor: pointer;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    color: var(--text-colour);
 }
 
 #search-input {
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid;
     padding: 0.5rem;
     font-size: 1rem;
     width: 10rem;
+    background-color: var(--background-colour);
 }
 
 #search-input:focus {
     outline: none;
 }
 
+#search-input::placeholder {
+    color: var(--text-colour);
+}
 
 main {
     display: flex;
@@ -89,10 +127,11 @@ main {
     border-radius: 20px;
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
     width: fit-content;
-    padding: 0.5rem 2rem;
-    margin-top: 3rem;
+    padding: 0rem 2rem;
+    margin-top: 2rem;
+
 }
 
 .additional-weather-info {
@@ -100,9 +139,33 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+    padding: 0rem 1rem;
+    border: 1px solid transparent;
+}
+
+.additional-weather-info:hover {
+    transition: 0.5s border;
+    border: 1px solid var(--text-colour);
 }
 
 .additional-weather-icons {
     max-width: 5rem;
     width: 100%;
+}
+
+[data-theme="dark"] .additional-weather-icons {
+    filter: invert(100%) hue-rotate(180deg);
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#disclaimer {
+    font-weight: 400;
+    font-size: 0.5rem;
+    text-align: center;
 }
