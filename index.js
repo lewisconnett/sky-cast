@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-    // Variable declarattions
+    // Variable declarations
     const searchInput = document.querySelector("#search-input");
     const searchButton = document.querySelector("#search-button");
     const themeToggle = document.querySelector(".theme-toggle-container");

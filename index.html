@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>skycast</title>
+        <script src="index.js"></script>
         <link rel="stylesheet" href="index.css" />
         <link
             rel="stylesheet"
@@ -21,7 +22,7 @@
                 <img
                     class="theme-toggle-icon"
                     id="light-mode-switch"
-                    src="assets/icons/light-mode-switch.svg" />
+                    src="assets/icons/light-mode-switch.svg" alt="Theme Toggle" />
             </div>
         </header>
         <section id="side-panel">
@@ -41,9 +42,9 @@
                 <h1
                     id="welcome-message"
                     aria-label="Welcome message will be displayed here"></h1>
-                <h4
+                <h2
                     id="date"
-                    aria-label="Today's date will be displayed here"></h4>
+                    aria-label="Today's date will be displayed here"></h2>
             </div>
             <div class="weather-info-container">
                 <img
@@ -56,23 +57,23 @@
                 <div class="additional-weather-info">
                     <img
                         class="additional-weather-icons"
-                        src="assets/icons/wi-windy copy.svg"
-                        alt="" />
-                    <h3 id="wind-speed">11 km/h</h3>
+                        src="assets/icons/wi-windy.svg"
+                        alt="Windy Weather Icon" />
+                    <h2 id="wind-speed">11 km/h</h2>
                 </div>
                 <div class="additional-weather-info">
                     <img
                         class="additional-weather-icons"
-                        src="assets/icons/wi-humidity copy.svg"
-                        alt="" />
-                    <h3 id="humidity">74%</h3>
+                        src="assets/icons/wi-humidity.svg"
+                        alt="Humidity Weather Icon" />
+                    <h2 id="humidity">74%</h2>
                 </div>
                 <div class="additional-weather-info">
                     <img
                         class="additional-weather-icons"
-                        src="assets/icons/wi-rain copy 2.svg"
-                        alt="" />
-                    <h3 id="precipitation-probability">24%</h3>
+                        src="assets/icons/wi-rain.svg"
+                        alt="Rain Weather Icon" />
+                    <h2 id="precipitation-probability">24%</h2>
                 </div>
             </div>
         </main>
@@ -80,5 +81,4 @@
             <p id="disclaimer">Powered by Tomorrow.io</p>
         </footer>
     </body>
-    <script src="index.js"></script>
 </html>
