@@ -1,110 +1,14 @@
 window.addEventListener("load", function () {
-    const city = document.querySelector("#search-input");
-    const searchCityBtn = document.querySelector("#search-button");
-    const themeToggleBtn = document.querySelector(".theme-toggle-icon");
+    // Variable declarattions
+    const searchInput = document.querySelector("#search-input");
+    const searchButton = document.querySelector("#search-button");
+    const themeToggle = document.querySelector(".theme-toggle-container");
+    const themeToggleButton = document.querySelector(".theme-toggle-icon");
+    const sidePanel = document.querySelector("#side-panel");
+    const locationContainer = document.querySelector(".location-container");
     const htmlElement = document.documentElement;
+    const searchForm = document.querySelector(".search-container");
     const now = new Date();
-    const hours = now.getHours();
-    displayWelcomeMessage(hours);
-    var location;
-
-    var defaultLocation = "london";
-    console.log(defaultLocation);
-    search(defaultLocation);
-
-    const formattedDate = getFormattedDate();
-    updateDate(formattedDate);
-
-    city.addEventListener("keydown", (e) => {
-        if (e.key == "Enter") {
-            location = city.value;
-            console.log("User pressed enter, location: " + location);
-            search(location);
-        }
-    });
-
-    searchCityBtn.addEventListener("click", function () {
-        location = city.value;
-        console.log("User clicked search, location: " + location);
-        search(location);
-    });
-
-    themeToggleBtn.addEventListener("click", function () {
-        console.log("User clicked theme toggle");
-        let currentTheme = htmlElement.getAttribute("data-theme");
-        let newTheme = currentTheme === "light" ? "dark" : "light";
-        if (newTheme === "dark") {
-            themeToggleBtn.src = "assets/icons/dark-mode-switch.svg";
-        } else {
-            themeToggleBtn.src = "assets/icons/light-mode-switch.svg";
-        }
-        htmlElement.setAttribute("data-theme", newTheme);
-    });
-
-    async function search(location) {
-        const options = {
-            method: "GET",
-            headers: { accept: "application/json" },
-        };
-
-        fetch(
-            `https://api.tomorrow.io/v4/weather/realtime?location=${location}&apikey=x0oWKsp7CFXZutB7BtLJKcLQ7fSbmmJ2`,
-            options
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                const weatherData = data.data.values;
-                const fullLocationName = data.location.name;
-                updateLocationLabel(fullLocationName);
-                displayContent(weatherData, location);
-                displayWeatherIcon(weatherData);
-            })
-            .catch((err) => console.error(err));
-    }
-
-    function displayContent(weatherData, location) {
-        const temperature = weatherData.temperature;
-        const temperatureLabel = document.querySelector("#temperature");
-        temperatureLabel.textContent = `${temperature}°C`;
-
-        const windSpeed = weatherData.windSpeed;
-        const windSpeedLabel = document.querySelector("#wind-speed");
-        windSpeedLabel.textContent = `${windSpeed} km/h`;
-
-        const humidity = weatherData.humidity;
-        const humidityLabel = document.querySelector("#humidity");
-        humidityLabel.textContent = `${humidity}%`;
-
-        const precipitationProbability = weatherData.precipitationProbability;
-        const precipitationProbabilityLabel = document.querySelector(
-            "#precipitation-probability"
-        );
-        precipitationProbabilityLabel.textContent = `${precipitationProbability}%`;
-    }
-
-    function updateLocationLabel(fullLocationName) {
-        const locationNameLabel = document.querySelector("#location-name");
-        locationNameLabel.textContent = fullLocationName.split(",")[0];
-    }
-
-    function displayWelcomeMessage(timeOfDay) {
-        var welcomeMessageLabel = document.querySelector("#welcome-message");
-        welcomeMessageLabel.textContent =
-            timeOfDay < 12
-                ? "Good Morning!"
-                : timeOfDay < 18
-                ? "Good Afternoon!"
-                : "Good Evening!";
-    }
-
-    function displayWeatherIcon(weatherData) {
-        const weatherCode = weatherData.weatherCode;
-        const weatherIcon = document.querySelector("#weather-icon");
-        const weatherIconName = weatherDescriptions[weatherCode];
-        weatherIcon.src = `assets/weather-icons/${weatherIconName}.svg`;
-        weatherIcon.style.display = "block";
-    }
-
     const weatherDescriptions = {
         1000: "clear_day",
         1001: "cloudy",
@@ -129,12 +33,145 @@ window.addEventListener("load", function () {
         7102: "ice_pellets_light",
         8000: "tstorm",
     };
+    let location;
+    let defaultLocation = "london";
 
-    function updateDate(formattedDate) {
-        var date = document.querySelector("#date");
+    // Initital setup
+    displayWelcomeMessage(now.getHours());
+    displayInitialWeather();
+    displayDate(getFormattedDate());
+
+    // Event listeners for user interactions
+    searchForm.addEventListener("keydown", function (e) {
+        if (e.target == searchInput && e.key == "Enter") {
+            location = searchInput.value;
+            search(location);
+        }
+    });
+
+    searchForm.addEventListener("click", function (e) {
+        if (e.target == searchButton) {
+            location = searchInput.value;
+            search(location);
+        }
+    });
+
+    locationContainer.addEventListener("click", toggleSidePanel);
+
+    themeToggle.addEventListener("click", function (e) {
+        console.log("User clicked theme toggle");
+        if (e.target == themeToggleButton) {
+            let currentTheme = htmlElement.getAttribute("data-theme");
+            let newTheme = currentTheme === "light" ? "dark" : "light";
+            if (newTheme === "dark") {
+                themeToggleButton.src = "assets/icons/dark-mode-switch.svg";
+            } else {
+                themeToggleButton.src = "assets/icons/light-mode-switch.svg";
+            }
+            htmlElement.setAttribute("data-theme", newTheme);
+        }
+    });
+
+    // Functions for data fetching and processing
+    async function fetchWeatherData(location) {
+        const options = {
+            method: "GET",
+            headers: { accept: "application/json" },
+        };
+
+        try {
+            const response = await fetch(
+                `https://api.tomorrow.io/v4/weather/realtime?location=${location}&apikey=x0oWKsp7CFXZutB7BtLJKcLQ7fSbmmJ2`,
+                options
+            );
+            if (!response.ok) {
+                throw new Error(
+                    `Error fetching weather data: ${response.statusText}`
+                );
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Error fetching weather data: ${error}`);
+            throw error;
+        }
+    }
+
+    async function search(location) {
+        try {
+            const weatherData = await fetchWeatherData(location);
+            const fullLocationName = weatherData.location.name;
+            updateLocationLabel(fullLocationName);
+            displayContent(weatherData.data.values);
+            displayWeatherIcon(weatherData.data.values);
+        } catch (error) {
+            console.error(`Error fetching weather data: ${error}`);
+        } finally {
+            toggleSidePanel();
+        }
+    }
+
+    // Functions for UI updates
+    function displayContent(weatherData) {
+        const { temperature, windSpeed, humidity, precipitationProbability } =
+            weatherData;
+
+        const temperatureLabel = document.querySelector("#temperature");
+        temperatureLabel.textContent = `${temperature}°C`;
+
+        const windSpeedLabel = document.querySelector("#wind-speed");
+        windSpeedLabel.textContent = `${windSpeed} km/h`;
+
+        const humidityLabel = document.querySelector("#humidity");
+        humidityLabel.textContent = `${humidity}%`;
+
+        const precipitationProbabilityLabel = document.querySelector(
+            "#precipitation-probability"
+        );
+        precipitationProbabilityLabel.textContent = `${precipitationProbability}%`;
+    }
+
+    function updateLocationLabel(fullLocationName) {
+        const locationNameLabel = document.querySelector("#location-name");
+        locationNameLabel.textContent = fullLocationName.split(",")[0];
+    }
+
+    function displayWelcomeMessage(timeOfDay) {
+        let welcomeMessageLabel = document.querySelector("#welcome-message");
+        welcomeMessageLabel.textContent =
+            timeOfDay < 12
+                ? "Good Morning!"
+                : timeOfDay < 18
+                ? "Good Afternoon!"
+                : "Good Evening!";
+    }
+
+    function displayWeatherIcon(weatherData) {
+        const weatherCode = weatherData.weatherCode;
+        const weatherIcon = document.querySelector("#weather-icon");
+        const weatherIconName = weatherDescriptions[weatherCode];
+        weatherIcon.alt = weatherIconName;
+        weatherIcon.src = `assets/weather-icons/${weatherIconName}.svg`;
+        weatherIcon.style.display = "block";
+    }
+
+    function displayInitialWeather() {
+        search(defaultLocation)
+            .then(() => toggleSidePanel())
+            .catch((error) =>
+                console.error("Error fetching weather data:", error)
+            );
+    }
+
+    function toggleSidePanel() {
+        sidePanel.classList.toggle("open");
+    }
+
+    function displayDate(formattedDate) {
+        let date = document.querySelector("#date");
         date.textContent = `Today, ${formattedDate}`;
     }
 
+    // Utility functions
     function getFormattedDate() {
         const today = new Date();
         const day = today.getDate().toString().padStart(2, "0");

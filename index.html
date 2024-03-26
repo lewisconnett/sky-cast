@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>skycast</title>
         <link rel="stylesheet" href="index.css" />
         <link
             rel="stylesheet"
@@ -13,8 +13,19 @@
         <header>
             <div class="location-container">
                 <span class="material-symbols-outlined"> location_on </span>
-                <h3 id="location-name"></h3>
+                <h3
+                    id="location-name"
+                    aria-label="Location will be displayed here"></h3>
             </div>
+            <div class="theme-toggle-container">
+                <img
+                    class="theme-toggle-icon"
+                    id="light-mode-switch"
+                    src="assets/icons/light-mode-switch.svg" />
+            </div>
+        </header>
+        <section id="side-panel">
+            <h2>Search Locations</h2>
             <div class="search-container">
                 <input
                     type="text"
@@ -24,17 +35,15 @@
                     search
                 </span>
             </div>
-            <div class="theme-toggle-container">
-                <img
-                    class="theme-toggle-icon"
-                    id="light-mode-switch"
-                    src="assets/icons/light-mode-switch.svg" />
-            </div>
-        </header>
+        </section>
         <main>
             <div class="welcome-message-container">
-                <h1 id="welcome-message"></h1>
-                <h4 id="date"></h4>
+                <h1
+                    id="welcome-message"
+                    aria-label="Welcome message will be displayed here"></h1>
+                <h4
+                    id="date"
+                    aria-label="Today's date will be displayed here"></h4>
             </div>
             <div class="weather-info-container">
                 <img
