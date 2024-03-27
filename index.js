@@ -36,11 +36,21 @@ window.addEventListener("load", function () {
         8000: "tstorm",
     };
     let location;
-    let defaultLocation = "london";
+
+    const successCallBack = (position) => {
+        let userLatitude = position.coords.latitude;
+        let userLongitude = position.coords.longitude;
+        displayInitialWeather({ userLatitude, userLongitude });
+    };
+
+    const errorCallBack = (position) => {
+        console.log(position);
+    };
+
+    navigator.geolocation.getCurrentPosition(successCallBack, errorCallBack);
 
     // Initital setup
     displayWelcomeMessage(now.getHours());
-    displayInitialWeather();
     displayDate(getFormattedDate());
 
     // Event listeners for user interactions
@@ -138,7 +148,11 @@ window.addEventListener("load", function () {
 
     function updateLocationLabel(fullLocationName) {
         const locationNameLabel = document.querySelector("#location-name");
-        locationNameLabel.textContent = fullLocationName.split(",")[0];
+        if (fullLocationName) {
+            locationNameLabel.textContent = fullLocationName.split(",")[0];
+        } else {
+            locationNameLabel.textContent = "My Location";
+        }
     }
 
     function displayWelcomeMessage(timeOfDay) {
@@ -160,8 +174,9 @@ window.addEventListener("load", function () {
         weatherIcon.style.display = "block";
     }
 
-    function displayInitialWeather() {
-        search(defaultLocation)
+    function displayInitialWeather(initialLocation) {
+        const userLocation = `${initialLocation.userLatitude}, ${initialLocation.userLongitude}`;
+        search(userLocation)
             .then(() => toggleSidePanel())
             .catch((error) =>
                 console.error("Error fetching weather data:", error)
