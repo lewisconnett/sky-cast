@@ -8,6 +8,8 @@ window.addEventListener("load", function () {
     const locationContainer = document.querySelector(".location-container");
     const htmlElement = document.documentElement;
     const searchForm = document.querySelector(".search-container");
+    const weatherInfoCont = document.querySelector(".weather-info-container");
+    const loader = document.querySelector(".loader");
     const now = new Date();
     const weatherDescriptions = {
         1000: "clear_day",
@@ -45,6 +47,7 @@ window.addEventListener("load", function () {
     searchForm.addEventListener("keydown", function (e) {
         if (e.target == searchInput && e.key == "Enter") {
             location = searchInput.value;
+            clearSearchInput();
             search(location);
         }
     });
@@ -52,6 +55,7 @@ window.addEventListener("load", function () {
     searchForm.addEventListener("click", function (e) {
         if (e.target == searchButton) {
             location = searchInput.value;
+            clearSearchInput();
             search(location);
         }
     });
@@ -97,6 +101,7 @@ window.addEventListener("load", function () {
     }
 
     async function search(location) {
+        toggleLoader();
         try {
             const weatherData = await fetchWeatherData(location);
             const fullLocationName = weatherData.location.name;
@@ -107,6 +112,7 @@ window.addEventListener("load", function () {
             console.error(`Error fetching weather data: ${error}`);
         } finally {
             toggleSidePanel();
+            toggleLoader();
         }
     }
 
@@ -169,6 +175,14 @@ window.addEventListener("load", function () {
     function displayDate(formattedDate) {
         let date = document.querySelector("#date");
         date.textContent = `Today, ${formattedDate}`;
+    }
+
+    function toggleLoader() {
+        loader.classList.toggle("show");
+    }
+
+    function clearSearchInput() {
+        searchInput.value = "";
     }
 
     // Utility functions
