@@ -1,0 +1,341 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 1.5rem;
+  min-height: 100dvh;
+  position: relative;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  #menu-icon {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+}
+
+main {
+  margin: 0;
+
+  #section-title {
+    font-weight: 400;
+    font-size: 1.75rem;
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 3rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #disclaimer {
+    font-size: 0.75rem;
+  }
+}
+
+.weather-cards-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.weather-card {
+    background-color: green;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h2, h3 {
+        margin: 0;
+    }
+
+    .location-label {
+        background-color: white;
+        width: fit-content;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+
+        .location-name {
+            font-weight: 200;
+        }
+    }
+
+    .weather-details-container {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        .temperature-label {
+            font-size: 4rem;
+            font-weight: 200;
+        }
+        
+    }
+
+    .view-data {
+        cursor: pointer;
+        background-color: transparent;
+        color: white;
+        width: fit-content;
+        border: 1px solid white;
+        padding: 0.5rem 1.5rem;
+        border-radius: 2rem;
+    }
+}
+
+
+
+// $background-colour: #F0F0F0;
+// $text-colour: #000000;
+// $accent-colour: #FFC107;
+// $border-colour: black;
+
+// [data-theme="dark"] {
+//     --text-colour: #DDDDDD;
+//     --background-colour: #00173F;
+// }
+
+// [data-theme="dark"] .additional-weather-icons {
+//     filter: invert(100%) hue-rotate(180deg);
+// }
+
+// body {
+//     font-family: 'Poppins', sans-serif;
+//     padding: 0;
+//     margin: 0;
+//     color: $text-colour;
+//     background-color: var(--background-colour);
+// }
+
+// header {
+//     display: flex;
+//     background-color: red;
+//     padding: 0.75rem;
+// }
+
+// .theme-toggle-icon {
+//     cursor: pointer;
+//     height: 2rem;
+// }
+
+// .theme-toggle-container {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     margin-right: 1rem;
+//     margin-left: auto;
+// }
+
+// .location-container {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.75rem;
+//     margin-left: 1rem;
+//     max-height: fit-content;
+//     cursor: pointer;
+//     padding: 0.5rem 1rem;
+//     border-radius: 20px;
+//     border: 1px solid transparent;
+// }
+
+// .location-container:hover {
+//     transition: 0.5s border;
+//     border: 1px solid ;
+// }
+
+// #location-name {
+//     margin: 0;
+// }
+
+// .search-container {
+//     gap: 1rem;
+//     display: flex;
+//     align-items: center;
+//     justify-content: left;
+//     margin-left: auto;
+//     margin-right: 1rem;
+// }
+
+// #search-button {
+//     cursor: pointer;
+//     padding: 0.5rem;
+//     border: none;
+//     border-radius: 5px;
+//     color: black;
+// }
+
+// #search-input {
+//     border: none;
+//     border-bottom: 1px solid;
+//     padding: 0.5rem;
+//     font-size: 1rem;
+//     width: 10rem;
+//     background-color: var(--acent-color);
+// }
+
+// #search-input:focus {
+//     outline: none;
+// }
+
+// #search-input::placeholder {
+//     color: black;
+// }
+
+// #side-panel {
+//     position: fixed;
+//     top: 0;
+//     left: -100%;
+//     width: 300px;
+//     height: 100vh;
+//     background-color: #FFC107;
+//     padding: 20px;
+//     transition: left 0.3s ease-in-out;
+// }
+
+// #side-panel.open {
+//     left: 0;
+//     z-index: 1;
+// }
+
+// #side-panel h2 {
+//     color: black;
+// }
+
+// main {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     margin-top: 1rem;
+// }
+
+// .welcome-message-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// }
+
+// #welcome-message {
+//     margin: 0;
+//     margin-top: 1rem;
+// }
+
+// #date {
+//     margin: 0rem;
+//     margin-top: 0.5rem;
+// }
+
+// .loader {
+//     display: none;
+//     position: absolute;
+//     top: 35%;
+//     border: 0.5rem solid #cccccc;
+//     border-top: 0.5rem solid #FFC107;
+//     border-radius: 50%;
+//     width: 60px;
+//     height: 60px;
+//     animation: spin 2s linear infinite;
+// }
+
+// .loader.show {
+//     display: block;
+// }
+
+// @keyframes spin {
+//     0% {
+//         transform: rotate(0deg);
+//     }
+
+//     100% {
+//         transform: rotate(360deg);
+//     }
+// }
+
+// .weather-info-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     gap: 0;
+//     margin-top: 0.5rem;
+// }
+
+// .weather-info-container.hide {
+//     display: none;
+// }
+
+// #weather-icon {
+//     width: 19rem;
+//     height: 19rem;
+//     transform: preserve-3d;
+// }
+
+// #temperature {
+//     margin: 0;
+// }
+
+// .additional-weather-info-container {
+//     border-radius: 20px;
+//     display: flex;
+//     justify-content: center;
+//     gap: 1rem;
+//     width: fit-content;
+//     padding: 0rem 2rem;
+//     margin-top: 2rem;
+// }
+
+// .additional-weather-info-container.hide {
+//     display: none;
+// }
+
+// .additional-weather-info {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     border-radius: 20px;
+//     padding: 0rem 1rem;
+//     border: 1px solid transparent;
+// }
+
+// .additional-weather-info:hover {
+//     transition: 0.5s border;
+//     border: 1px solid ;
+// }
+
+// .additional-weather-icons {
+//     max-width: 5rem;
+//     width: 100%;
+// }
+
+// footer {
+//     position: absolute;
+//     bottom: 0;
+//     width: 100%;
+// }
+
+// #disclaimer {
+//     font-weight: 400;
+//     font-size: 0.5rem;
+//     text-align: center;
+// }
+// @media screen and (max-width: 550px) {
+//     .additional-weather-info-container {
+//         display: none;
+//     }
+
+// }
