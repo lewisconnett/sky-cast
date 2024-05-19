@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
   const weatherCardList = document.querySelector(".weather-cards-container");
   const locations = ["London", "New York", "Tokyo"];
-//   displayWeatherCards(locations);
+  // displayWeatherCards(locations);
 
   // Function to fetch weather data for the given location.
   async function fetchWeatherData(location) {
@@ -46,7 +46,9 @@ window.addEventListener("load", function () {
     let temperatureLabel = document.createElement("h3");
     let weatherDetails = document.createElement("div");
     let weatherDescription = document.createElement("h3");
-    let viewData = document.createElement("button");
+    let viewDataBtn = document.createElement("button");
+    let viewBtnTitle = document.createElement("h4");
+    let viewBtnSymbol = document.createElement("img");
 
     weatherCard.className = "weather-card";
     locationLabel.className = "location-label";
@@ -55,10 +57,16 @@ window.addEventListener("load", function () {
     temperatureLabel.className = "temperature-label";
     weatherDetails.className = "weather-details";
     weatherDescription.className = "weather-description";
-    viewData.className = "view-data";
+    viewDataBtn.className = "view-data";
 
+    viewBtnSymbol.src =
+      "assets/icons/menu-icons/arrow_forward_ios_24dp_FILL0_wght400_GRAD0_opsz24.svg";
+    viewBtnTitle.textContent = "View";
     temperatureLabel.textContent = `${temperature}°`;
     locationLabel.textContent = location;
+
+    viewDataBtn.appendChild(viewBtnTitle);
+    viewDataBtn.appendChild(viewBtnSymbol);
 
     locationLabel.appendChild(locationName);
     weatherDetails.appendChild(weatherDescription);
@@ -68,6 +76,7 @@ window.addEventListener("load", function () {
 
     weatherCard.appendChild(locationLabel);
     weatherCard.appendChild(weatherDetailsContainer);
+    weatherCard.appendChild(viewDataBtn);
 
     return weatherCard;
   }
