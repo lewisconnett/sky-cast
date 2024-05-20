@@ -1,5 +1,11 @@
 window.addEventListener("load", function () {
   const weatherCardList = document.querySelector(".weather-cards-container");
+  const toggleThemeBtn = document.querySelector(".theme-toggle");
+  const sidePanel = document.querySelector(".side-panel");
+  const settingsBtn = document.querySelector("#menu-icon");
+  const closeSettingsPannelBtn = document.querySelector(
+    "#close-side-panel-btn"
+  );
   const locations = ["London", "New York", "Tokyo"];
   // displayWeatherCards(locations);
 
@@ -35,6 +41,31 @@ window.addEventListener("load", function () {
       );
       weatherCardList.appendChild(weatherCard);
     }
+  }
+
+  toggleThemeBtn.addEventListener("click", toggleTheme);
+
+  function toggleTheme() {
+    console.log("Toggling Theme");
+    if (toggleThemeBtn.src.includes("light_mode")) {
+      toggleThemeBtn.src =
+        "assets/icons/menu-icons/dark_mode_24dp_FILL0_wght400_GRAD0_opsz24.svg";
+    } else {
+      toggleThemeBtn.src =
+        "assets/icons/menu-icons/light_mode_24dp_FILL0_wght400_GRAD0_opsz24.svg";
+    }
+  }
+
+  settingsBtn.addEventListener("click", () => {
+    console.log("Menu button was clicked!");
+    toggleSidePanel();
+  });
+
+  closeSettingsPannelBtn.addEventListener("click", toggleSidePanel);
+
+  function toggleSidePanel() {
+    console.log("Toggling side panel...");
+    sidePanel.classList.toggle("open");
   }
 
   // Function to create a weather card.
