@@ -3,11 +3,17 @@ window.addEventListener("load", function () {
   const toggleThemeBtn = document.querySelector(".theme-toggle");
   const sidePanel = document.querySelector(".side-panel");
   const settingsBtn = document.querySelector("#menu-icon");
+  const mainSectionTitle = document.querySelector("#section-title");
   const closeSettingsPannelBtn = document.querySelector(
     "#close-side-panel-btn"
   );
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  mainSectionTitle.textContent = `Today, ${today.toUTCString().slice(4, 11)}`;
+
   const locations = ["London", "New York", "Tokyo"];
-  // displayWeatherCards(locations);
+  const degreeUnit = "F";
+  // displayWeatherCards(locations, degreeUnit);
 
   // Function to fetch weather data for the given location.
   async function fetchWeatherData(location) {
@@ -32,12 +38,13 @@ window.addEventListener("load", function () {
   }
 
   // Function to display weather cards for the given locations.
-  async function displayWeatherCards(locations) {
+  async function displayWeatherCards(locations, degreeUnit) {
     for (i = 0; i <= locations.length - 1; i++) {
       const weatherData = await fetchWeatherData(locations[i]);
       let weatherCard = createWeatherCard(
         locations[i],
-        Math.round(weatherData.data.values.temperature)
+        Math.round(weatherData.data.values.temperature),
+        degreeUnit
       );
       weatherCardList.appendChild(weatherCard);
     }
@@ -69,7 +76,7 @@ window.addEventListener("load", function () {
   }
 
   // Function to create a weather card.
-  function createWeatherCard(location, temperature) {
+  function createWeatherCard(location, temperature, degreeUnit) {
     let weatherCard = document.createElement("div");
     let locationLabel = document.createElement("div");
     let locationName = document.createElement("h2");
@@ -93,8 +100,8 @@ window.addEventListener("load", function () {
     viewBtnSymbol.src =
       "assets/icons/menu-icons/arrow_forward_ios_24dp_FILL0_wght400_GRAD0_opsz24.svg";
     viewBtnTitle.textContent = "View";
-    temperatureLabel.textContent = `${temperature}°`;
-    locationLabel.textContent = location;
+    temperatureLabel.textContent = `${temperature}°${degreeUnit}`;
+    locationLabel.textContent = `${location}`;
 
     viewDataBtn.appendChild(viewBtnTitle);
     viewDataBtn.appendChild(viewBtnSymbol);

@@ -15,11 +15,32 @@ header {
   align-items: center;
   justify-content: center;
   position: relative;
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}
+header #main-logo {
+  width: 15rem;
+  height: auto;
+  padding: 0;
 }
 header #menu-icon {
   position: absolute;
   right: 0;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+header #menu-icon:hover {
+  background-color: rgba(0, 0, 0, 0.086);
+}
+header #menu-icon:active {
+  background-color: rgba(0, 0, 0, 0.423);
 }
 
 main {
@@ -58,6 +79,11 @@ footer #disclaimer {
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.weather-card:hover {
+  transform: scale(1.01);
 }
 .weather-card h2,
 .weather-card h3 {
@@ -127,6 +153,18 @@ footer #disclaimer {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.side-panel .side-panel-header #close-side-panel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.086);
+}
+.side-panel .side-panel-header #close-side-panel-btn:active {
+  background-color: rgba(0, 0, 0, 0.423);
 }
 .side-panel #settings-list {
   list-style: none;

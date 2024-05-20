@@ -9,12 +9,10 @@
   </head>
   <body>
     <header>
-      <h1 id="page-title">skycast</h1>
-      <img
-        id="menu-icon"
-        src="assets/icons/menu-icons/more-vert.svg"
-        alt="Menu Icon"
-      />
+      <img id="main-logo" src="assets/skycast-logo.svg" alt="skycast Logo">
+      <button id="menu-icon" type="button">
+        <img src="assets/icons/menu-icons/more-vert.svg" alt="Menu Icon" />
+      </button>
     </header>
     <div class="side-panel">
       <div class="side-panel-header">
@@ -33,12 +31,12 @@
           />
           <p>Edit List</p>
         </li>
-        <li><p>Fahrenheit °F</p></li>
-        <li><p>Celsius °C</p></li>
+        <li><img class=settings-list-icon" src="assets/icons/menu-icons/device_thermostat_24dp_FILL0_wght400_GRAD0_opsz24.svg" alt="Thermostat Icon">
+          <p>Change to Fahrenheit °F</p></li>
       </ul>
       <img
         class="theme-toggle"
-        src="assets/icons/menu-icons/light_mode_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+        src="assets/icons/menu-icons/light_mode_24dp_FILL0_wght400_GRAD0_opsz24.svg" alt="Edit Icon"
       />
     </div>
     <main>
@@ -49,7 +47,7 @@
             <h2 class="location-name">London</h2>
           </div>
           <div class="weather-details-container">
-            <h3 class="temperature-label">20°</h3>
+            <h3 class="temperature-label">20°C</h3>
             <div class="weather-details">
               <h3 class="weather-description"></h3>
             </div>

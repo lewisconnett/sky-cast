@@ -16,11 +16,35 @@ header {
   align-items: center;
   justify-content: center;
   position: relative;
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+
+  #main-logo {
+    width: 15rem;
+    height: auto;
+    padding: 0;
+  }
 
   #menu-icon {
     position: absolute;
     right: 0;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.086);
+    }
+
+    &:active {
+      background-color: rgba(0, 0, 0, 0.423);
+    }
   }
 }
 
@@ -62,6 +86,12 @@ footer {
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 
   h2,
   h3 {
@@ -123,7 +153,7 @@ footer {
   position: absolute;
   right: -100%;
   width: 100%;
-  transition: right .2s ease-in-out;
+  transition: right 0.2s ease-in-out;
 
   .side-panel-header {
     display: flex;
@@ -140,6 +170,20 @@ footer {
       background-color: transparent;
       border: none;
       cursor: pointer;
+      transition: background-color 0.3s;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.086);
+      }
+
+      &:active {
+        background-color: rgba(0, 0, 0, 0.423);
+      }
     }
   }
 
