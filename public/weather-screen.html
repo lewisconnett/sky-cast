@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: Make the title dynamic so it matches the location the user selected-->
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <main>
+      <div class="main-weather-info">
+        <div class="weather-info-container">
+          <h1>20°C</h1>
+          <div class="current-location-container">
+            <img
+              src="assets/icons/menu-icons/location_on_24dp_FILL0_wght400_GRAD0_opsz24.svg"
+              alt="Location Pin Icon" />
+            <h2>London, England</h2>
+          </div>
+
+          <h3>Tue, 12:47pm</h3>
+        </div>
+        <img
+          src="https://placehold.co/150x150"
+          id="weather-icon"
+          alt="Weather Icon" />
+      </div>
+      <div class="additional-weather-info-container">
+        <ul class="additional-weather-info">
+          <li>
+            <p>UV Index</p>
+            <img
+              class="additional-weather-info-icon"
+              src="assets/icons/wi-day-sunny.svg"
+              alt="UV Index Icon" />
+              <p class="additional-weather-info-measurement">5</p>
+          </li>
+          <li>
+            <p>Humidity</p>
+            <img
+              class="additional-weather-info-icon"
+              src="assets/icons/wi-humidity.svg"
+              alt="Humidity Icon" />
+              <p class="additional-weather-info-measurement">90%</p>
+          </li>
+          <li>
+            <p>Wind</p>
+            <img
+              class="additional-weather-info-icon"
+              src="assets/icons/wi-windy.svg"
+              alt="Windy Icon" />
+              <p class="additional-weather-info-measurement">5 km/h</p>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>
