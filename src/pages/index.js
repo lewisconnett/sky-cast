@@ -3,15 +3,22 @@ window.addEventListener('load', function () {
   const API_KEY = 'x0oWKsp7CFXZutB7BtLJKcLQ7fSbmmJ2';
   const WEATHER_API_URL = `https://api.tomorrow.io/v4/weather/realtime?apikey=${API_KEY}&location=`;
 
+  // Development mode flag
+  const IS_DEV_MODE = true; 
+
   // DOM Elements
   const weatherCardList = document.querySelector('.weather-cards-container');
   const toggleThemeBtn = document.querySelector('.theme-toggle');
   const sidePanel = document.querySelector('.side-panel');
   const settingsBtn = document.querySelector('#menu-icon');
   const mainSectionTitle = document.querySelector('#section-title');
-  const closeSettingsPannelBtn = document.querySelector('#close-side-panel-btn');
+  const closeSettingsPannelBtn = document.querySelector(
+    '#close-side-panel-btn'
+  );
   const changeTempUnitBtn = document.querySelector('#change-temp-unit-btn');
-  const changeTemperatureLabel = document.querySelector('#change-temperature-unit');
+  const changeTemperatureLabel = document.querySelector(
+    '#change-temperature-unit'
+  );
 
   // Initial Data
   const locations = ['London', 'New York', 'Tokyo', 'Madrid'];
@@ -25,20 +32,41 @@ window.addEventListener('load', function () {
   // Initialise the temperature label
   changeTemperatureLabel.textContent = `Change the unit to Fahrenheit (°F)`;
 
+  // Mock weather data function for development
+  function getMockWeatherData(location) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: {
+            values: {
+              temperature: Math.random() * 30 + 10, // Random temperature between 10 and 40
+            },
+          },
+        });
+      }, 500); // Simulate network delay
+    });
+  }
+
   // Fetch weather data for the given locations
   async function fetchWeatherData(location) {
-    try {
-      const response = await fetch(`${WEATHER_API_URL}${location}`, {
-        method: 'GET',
-        headers: { accept: 'application/json' },
-      });
-      if (!response.ok) {
-        throw new Error(`Error fetching weather data: ${response.statusText}`);
+    if (IS_DEV_MODE) {
+      return getMockWeatherData(location);
+    } else {
+      try {
+        const response = await fetch(`${WEATHER_API_URL}${location}`, {
+          method: 'GET',
+          headers: { accept: 'application/json' },
+        });
+        if (!response.ok) {
+          throw new Error(
+            `Error fetching weather data: ${response.statusText}`
+          );
+        }
+        return await response.json();
+      } catch (error) {
+        console.error(`Error fetching weather data: ${error}`);
+        throw error;
       }
-      return await response.json();
-    } catch (error) {
-      console.error(`Error fetching weather data: ${error}`);
-      throw error;
     }
   }
 
@@ -52,7 +80,11 @@ window.addEventListener('load', function () {
       try {
         const weatherData = await fetchWeatherData(location);
         const temperature = Math.round(weatherData.data.values.temperature);
-        const weatherCard = createWeatherCard(location, temperature, temperatureUnit);
+        const weatherCard = createWeatherCard(
+          location,
+          temperature,
+          temperatureUnit
+        );
         weatherCardList.appendChild(weatherCard);
       } catch (error) {
         console.error(`Failed to display weather for ${location}: ${error}`);
